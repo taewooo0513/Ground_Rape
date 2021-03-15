@@ -142,7 +142,6 @@ INT WINAPI wWinMain( HINSTANCE, HINSTANCE, LPWSTR, int )
     DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
     DXUTCreateWindow( L"Ground_Rape" );
     DXUTCreateDevice( true, WINSIZEX, WINSIZEY);
-
     // Start the render loop
     DXUTMainLoop();
 

@@ -3,6 +3,7 @@
 class Player : public Object
 {
 private:
+	Texture* Line;
 	enum Direction
 	{
 		ELeft,
@@ -29,5 +30,8 @@ public:
 
 	void FloodFill(Vec2 Pos);
 	void ChangeTile();
+	int C(int i, int j);
+	void DelLine(int i, int j);
+	bool Coll(int i, int j,int Size);
 };
 

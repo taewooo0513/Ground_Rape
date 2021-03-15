@@ -122,6 +122,7 @@
     </ClCompile>
     <ClCompile Include="Boss1Stage.cpp" />
     <ClCompile Include="SpeedEnemy.cpp" />
+    <ClCompile Include="BigEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -152,6 +153,7 @@
     </ClInclude>
     <ClInclude Include="Boss1Stage.h" />
     <ClInclude Include="SpeedEnemy.h" />
+    <ClInclude Include="BigEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">

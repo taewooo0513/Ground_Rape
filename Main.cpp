@@ -11,11 +11,10 @@ Main::~Main()
 
 void Main::Init()
 {
-
+	IMAGE->AddImage("Line","./image/Line.png");
 	IMAGE->AddImage("FlashEnemy", "./image/FlashEnemy.png");
 	IMAGE->AddImage("SpeedEnemy","./image/SpeedEnemy.png");
 	IMAGE->AddImage("BigEnemy", "./image/BigEnemy.png");
-
 	IMAGE->AddImage("Player","./image/Player.png");
 	IMAGE->AddImage("BackG","./image/BackG.png");
 	IMAGE->AddImage("Boss1", "./image/Boss1.png");

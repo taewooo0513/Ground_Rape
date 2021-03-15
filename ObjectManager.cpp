@@ -9,13 +9,13 @@ ObjectManager::~ObjectManager()
 {
 }
 
-Object * ObjectManager::AddObject(Object * obj, int Tag)
+Object* ObjectManager::AddObject(Object* obj, int Tag)
 {
 	if (obj == nullptr)
 	{
 		return nullptr;
 	}
-	objlist[Tag].push_back(obj );
+	objlist[Tag].push_back(obj);
 	return obj;
 }
 
@@ -26,9 +26,9 @@ void ObjectManager::Update()
 		for (auto iter = objlist[i].begin(); iter != objlist[i].end();)
 		{
 			(*iter)->Update();
+			
 			if ((*iter)->ObjectLive() == false)
 			{
-
 				SAFE_DELETE((*iter));
 				iter = objlist[i].erase(iter);
 			}

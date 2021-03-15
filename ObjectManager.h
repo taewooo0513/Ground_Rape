@@ -10,6 +10,7 @@ public:
 	{
 		Begin,
 		Play,
+		ENEMY,
 		End
 	};
 	list<Object*> objlist[10];
