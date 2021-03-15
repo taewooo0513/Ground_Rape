@@ -1,0 +1,11 @@
+﻿  BigEnemy.cpp
+C:\Users\taewo\Desktop\Ground_Rape\BigEnemy.cpp(10,22): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\BigEnemy.cpp(11,22): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\BigEnemy.cpp(17,21): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\BigEnemy.cpp(17,14): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다.
+  1 of 1428 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    12 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  Ground_Rape_2010.vcxproj -> C:\Users\taewo\Desktop\Ground_Rape\Release\Ground_Rape.exe
