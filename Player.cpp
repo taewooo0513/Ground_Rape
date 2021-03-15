@@ -841,18 +841,24 @@ void Player::DelLine(int i, int j)
 
 bool Player::Coll(int i , int j ,int Size)
 {
+	float s;
+
 	for (int jj = 0; jj < WINSIZEY; jj++)
 	{
 		for (int ii = 0; ii < WINSIZEX; ii++)
 		{
 			if (Map[jj][ii] == 2)
 			{
-				if (sqrt((i - jj) * (i - jj) + (j - jj) * (j - jj))< Size)
+				s = sqrt((ii - i) * (ii - i) + (jj - j) * (jj - j));
+
+				if (s <Size)
 				{
 					return true;
 				}
 			}
 		}
 	}
+	cout << s <<"\n";
+
 	return false;
 }

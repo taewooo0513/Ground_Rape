@@ -5,7 +5,11 @@
 #include <map>
 #include <list>
 #include <string>
-
+#ifdef UNICODE
+#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
+#else
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+#endif
 using namespace std;
 
 const static int WINSIZEX = 1920;

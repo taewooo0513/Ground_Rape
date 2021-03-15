@@ -28,16 +28,19 @@ void BigEnemy::Update()
 {
 	if (OBJ->player->Map[int(Pos.y)][int(Pos.x)] == 1)
 	{
-		DieObj();
+		
 	}
 
-	OBJ->player->Coll(Pos.x,Pos.y,text->info.Width * 0.2);
+	if (OBJ->player->Coll(Pos.x, Pos.y, (text->info.Width* 0.2)/2))
+	{
+	exit(0);
+	}
 
 }
 
 void BigEnemy::Render()
 {
-	IMAGE->CenterRender(text, Vec2(500, 500), Vec2(0.2, 0.2));
+	IMAGE->Render(text, Vec2(Pos.x, Pos.y), Vec2(0.2, 0.2));
 }
 
 void BigEnemy::Collion(Object* obj)
