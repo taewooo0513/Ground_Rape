@@ -13,8 +13,8 @@ BigEnemy::BigEnemy()
 	Dir.y = (rand() % 2 - 1);
 	if (Dir.x == 0 && Dir.y == 0)
 	{
-		Dir.x = 2;
-		Dir.y = 2;
+		Dir.x = 1;
+		Dir.y = 1;
 	}
 	Pos = Vec2(X(Rd), Y(Rd));
 	text = IMAGE->FindImage("BigEnemy");
@@ -26,21 +26,42 @@ BigEnemy::~BigEnemy()
 
 void BigEnemy::Update()
 {
-	if (OBJ->player->Map[int(Pos.y)][int(Pos.x)] == 1)
-	{
-		
-	}
 
 	if (OBJ->player->Coll(Pos.x, Pos.y, (text->info.Width* 0.2)/2))
 	{
-	exit(0);
+		if (timer->GetTime()>0.1)
+		{
+			if (Dir.x < 0)
+			{
+				Dir.x = 1;
+			}
+			else if (Dir.x > 0)
+			{
+				Dir.x = -1;
+
+			}
+			if (Dir.y < 0)
+			{
+				Dir.y = 1;
+
+			}
+			else if (Dir.y > 0)
+			{
+				Dir.y = -1;
+			}
+			timer->Reset();
+		}
 	}
 
+
+	
+	Pos.x += Dir.x;
+	Pos.y += Dir.y;
 }
 
 void BigEnemy::Render()
 {
-	IMAGE->Render(text, Vec2(Pos.x, Pos.y), Vec2(0.2, 0.2));
+	IMAGE->CenterRender(text, Vec2(Pos.x, Pos.y), Vec2(0.2, 0.2));
 }
 
 void BigEnemy::Collion(Object* obj)

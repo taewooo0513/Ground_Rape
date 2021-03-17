@@ -1,10 +1,18 @@
-﻿  BigEnemy.cpp
-C:\Users\taewo\Desktop\Ground_Rape\BigEnemy.cpp(10,22): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\taewo\Desktop\Ground_Rape\BigEnemy.cpp(11,22): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\taewo\Desktop\Ground_Rape\BigEnemy.cpp(17,21): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\taewo\Desktop\Ground_Rape\BigEnemy.cpp(17,14): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  Boss1Stage.cpp
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(15,2): warning C4458: 'i' 선언은 클래스 멤버를 숨깁니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.h(11,6): message : 'Boss1Stage::i' 선언을 참조하십시오.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(48,59): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(48,30): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(48,23): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(49,63): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(49,34): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(49,27): warning C4244: '인수': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(53,4): warning C4458: 'i' 선언은 클래스 멤버를 숨깁니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.h(11,6): message : 'Boss1Stage::i' 선언을 참조하십시오.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.cpp(163,34): warning C4458: 'obj' 선언은 클래스 멤버를 숨깁니다.
+C:\Users\taewo\Desktop\Ground_Rape\Boss1Stage.h(9,15): message : 'Boss1Stage::obj' 선언을 참조하십시오.
   코드를 생성하고 있습니다.
-  1 of 1428 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1583 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     12 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.

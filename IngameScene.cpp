@@ -15,11 +15,9 @@ IngameScene::~IngameScene()
 void IngameScene::Init()
 {
 	OBJ->AddObject(new BigEnemy,1);
-	OBJ->AddObject(new Boss1Stage(Vec2(WINSIZEX/2,500 )),1);
+	OBJ->AddObject(new Boss1Stage(Vec2(WINSIZEX/2,500 ),0),2);
 	OBJ->AddObject(new Player(Vec2(WINSIZEX/2,0)),0);
-	OBJ->AddObject(new SpeedEnemy,1);
-	OBJ->AddObject(new SpeedEnemy, 1);
-	OBJ->AddObject(new SpeedEnemy, 1);
+
 
 }
 

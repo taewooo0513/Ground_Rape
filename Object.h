@@ -7,7 +7,7 @@ class Object abstract
  public:
 	 Object() {}
 	 ~Object() {}
-	 
+	  vector<Vec2> VPos;
  public:
 	 virtual void Update() PURE;
 	 virtual void Render() PURE;

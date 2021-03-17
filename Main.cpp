@@ -18,6 +18,9 @@ void Main::Init()
 	IMAGE->AddImage("Player","./image/Player.png");
 	IMAGE->AddImage("BackG","./image/BackG.png");
 	IMAGE->AddImage("Boss1", "./image/Boss1.png");
+	IMAGE->AddImage("Boss", "./image/Boss.png");
+	
+		IMAGE->AddImage("AssaultboatC", "./image/AssaultboatC.png");
 
 	SCENE->AddScene("IngameScene", new IngameScene);
 	SCENE->ChangeScene("IngameScene");

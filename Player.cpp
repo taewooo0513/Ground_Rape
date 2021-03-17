@@ -5,7 +5,7 @@ Player::Player(Vec2 Pos)
 	:Pos(Pos)
 {
 	Line = IMAGE->FindImage("Line");
-
+	Speed = 5;
 	OBJ->player = this;
 	Back = IMAGE->FindImage("BackG");
 	text = IMAGE->FindImage("Player");
@@ -43,14 +43,33 @@ Player::~Player()
 
 void Player::PlayerLineMove()
 {
-
 	if (DXUTIsKeyDown(VK_LEFT))
 	{
 		if (Pos.x != 0 && Map[int(Pos.y)][int(Pos.x) == 2])
 		{
 			if (Map[int(Pos.y)][int(Pos.x - 1)] == 2)
 			{
-				Pos.x -= 1;
+				if (Pos.x - Speed > 0)
+				{
+					int a = 0;
+					for (int i = 1; i < Speed; i++)
+					{
+						if (Map[int(Pos.y)][int(Pos.x - i)] == 2)
+						{
+							a++;
+						}
+						else if (Map[int(Pos.y)][int(Pos.x - i)] != 2)
+						{
+							break;
+						}
+
+					}
+					Pos.x -= a;
+				}
+				else
+				{
+					Pos.x = 0;
+				}
 			}
 			else if (Map[int(Pos.y)][int(Pos.x - 1)] == 0)
 			{
@@ -66,11 +85,32 @@ void Player::PlayerLineMove()
 	}
 	else if (DXUTIsKeyDown(VK_UP))
 	{
+
 		if (Pos.y != 0 && Map[int(Pos.y)][int(Pos.x) == 2])
 		{
 			if (Map[int(Pos.y - 1)][int(Pos.x)] == 2)
 			{
-				Pos.y--;
+				if (Pos.y - Speed > 0)
+				{
+					int a = 0;
+					for (int i = 1; i < Speed; i++)
+
+					{
+						if (Map[int(Pos.y - i)][int(Pos.x)] != 2)
+						{
+							break;
+						}
+						else
+						{
+							a++;
+						}
+					}
+					Pos.y -= a;
+				}
+				else
+				{
+					Pos.y = 0;
+				}
 			}
 			else if (Map[int(Pos.y - 1)][int(Pos.x)] == 0)
 			{
@@ -82,6 +122,7 @@ void Player::PlayerLineMove()
 				}
 			}
 		}
+
 	}
 	else if (DXUTIsKeyDown(VK_DOWN))
 	{
@@ -89,7 +130,27 @@ void Player::PlayerLineMove()
 		{
 			if (Map[int(Pos.y + 1)][int(Pos.x)] == 2)
 			{
-				Pos.y++;
+				if (Pos.y + Speed < WINSIZEY)
+				{
+					int a = 0;
+					for (int i = 1; i < Speed; i++)
+
+					{
+						if (Map[int(Pos.y + i)][int(Pos.x)] != 2)
+						{
+							break;
+						}
+						else
+						{
+							a++;
+						}
+					}
+					Pos.y += a;
+				}
+				else
+				{
+					Pos.y = WINSIZEY;
+				}
 			}
 			else if (Map[int(Pos.y + 1)][int(Pos.x)] == 0)
 			{
@@ -108,7 +169,26 @@ void Player::PlayerLineMove()
 		{
 			if (Map[int(Pos.y)][int(Pos.x + 1)] == 2)
 			{
-				Pos.x++;
+				if (Pos.x + Speed < WINSIZEX)
+				{
+					int a = 0;
+					for (int i = 1; i <= Speed; i++)
+					{
+						if (Map[int(Pos.y)][int(Pos.x + i)] != 2)
+						{
+							break;
+						}
+						else
+						{
+							a++;
+						}
+					}
+					Pos.x += a;
+				}
+				else
+				{
+					Pos.x = WINSIZEX;
+				}
 			}
 			else if (Map[int(Pos.y)][int(Pos.x + 1)] == 0)
 			{
@@ -121,7 +201,6 @@ void Player::PlayerLineMove()
 			}
 		}
 	}
-
 }
 void Player::PlayerDrawLine()
 {
@@ -131,9 +210,23 @@ void Player::PlayerDrawLine()
 	case ELeft:
 		if (Map[int(Pos.y)][int(Pos.x)] == 0)
 		{
-			Map[int(Pos.y)][int(Pos.x)] = 2;
-
-			Pos.x--;
+			if (Pos.y + Speed < WINSIZEY)
+			{
+				int a = 0;
+				for (int i = 0; i < Speed; i++)
+				{
+					if (Map[int(Pos.y)][int(Pos.x - i)] == 2)
+					{
+						break;
+					}
+					else
+					{
+						a++;
+					}
+					Map[int(Pos.y)][int(Pos.x - i)] = 2;
+				}
+				Pos.x -= a;
+			}
 			if (DXUTWasKeyPressed(VK_UP))
 			{
 				Dir = EUp;
@@ -148,7 +241,6 @@ void Player::PlayerDrawLine()
 			LineDrawStart = false;
 			FloodFill(OBJ->Boss1->Pos);
 			ChangeTile();
-
 			D3DLOCKED_RECT rt;
 			for (int i = 0; i < WINSIZEY; i++)
 			{
@@ -160,6 +252,61 @@ void Player::PlayerDrawLine()
 					{
 						if (i == 0 || i == WINSIZEY || j == 0 || j == WINSIZEX)
 						{
+							if (i != 0)
+							{
+								if (j != WINSIZEX)
+									if (Map[i - 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+									}
+								if (j != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+							}
+							if (i != WINSIZEY)
+							{
+								if (j != WINSIZEX)
+									if (Map[i + 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+								if (j != 0)
+									if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
+							if (j != 0)
+							{
+								if (i != WINSIZEY)
+									if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+									}
+								if (i != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
+							if (j != WINSIZEX)
+							{
+								if (i != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+								if (i != WINSIZEY)
+									if (Map[i + 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
 							s++;
 						}
 						else
@@ -181,7 +328,6 @@ void Player::PlayerDrawLine()
 							if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
 							{
 								s = 3;
-
 							}
 						}
 						if (i != WINSIZEY)
@@ -214,7 +360,7 @@ void Player::PlayerDrawLine()
 						}
 						if (s == 2)
 						{
-							Map[i][j] = 5;
+							Map[i][j] = 7;
 						}
 					}
 				}
@@ -223,7 +369,7 @@ void Player::PlayerDrawLine()
 			{
 				for (int j = 0; j < WINSIZEX; j++)
 				{
-					if (Map[i][j] == 5)
+					if (Map[i][j] == 7)
 					{
 						Map[i][j] = 1;
 
@@ -249,14 +395,12 @@ void Player::PlayerDrawLine()
 			Back->texturePtr->UnlockRect(0);
 			D3DLOCKED_RECT rtrt9;
 			Line->texturePtr->LockRect(0, &rtrt9, 0, D3DLOCK_DISCARD);
-
 			DWORD* TextureColor9 = (DWORD*)rtrt9.pBits;
 			for (int i = 0; i < WINSIZEY; i++)
 			{
 				for (int j = 0; j < WINSIZEX; j++)
 				{
 					int nIdx = i * Line->info.Width + j;
-
 					if (Map[i][j] == 1)
 					{
 						D3DXCOLOR TargetPixel9 = TextureColor9[nIdx];
@@ -273,8 +417,22 @@ void Player::PlayerDrawLine()
 	case ERight:
 		if (Map[int(Pos.y)][int(Pos.x)] == 0)
 		{
-			Map[int(Pos.y)][int(Pos.x)] = 2;
-			Pos.x++;
+
+			int a = 0;
+			for (int i = 0; i < Speed; i++)
+			{
+				if (Map[int(Pos.y)][int(Pos.x + i)] == 2)
+				{
+					break;
+				}
+				else
+				{
+					a++;
+				}
+				Map[int(Pos.y)][int(Pos.x + i)] = 2;
+			}
+			Pos.x += a;
+
 			if (DXUTWasKeyPressed(VK_UP))
 			{
 				Dir = EUp;
@@ -298,6 +456,61 @@ void Player::PlayerDrawLine()
 					{
 						if (i == 0 || i == WINSIZEY || j == 0 || j == WINSIZEX)
 						{
+							if (i != 0)
+							{
+								if (j != WINSIZEX)
+									if (Map[i - 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+									}
+								if (j != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+							}
+							if (i != WINSIZEY)
+							{
+								if (j != WINSIZEX)
+									if (Map[i + 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+								if (j != 0)
+									if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
+							if (j != 0)
+							{
+								if (i != WINSIZEY)
+									if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+									}
+								if (i != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
+							if (j != WINSIZEX)
+							{
+								if (i != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+								if (i != WINSIZEY)
+									if (Map[i + 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
 							s++;
 						}
 						else
@@ -355,7 +568,7 @@ void Player::PlayerDrawLine()
 						}
 						if (s == 2)
 						{
-							Map[i][j] = 3;
+							Map[i][j] = 7;
 						}
 					}
 				}
@@ -365,7 +578,7 @@ void Player::PlayerDrawLine()
 				for (int j = 0; j < WINSIZEX; j++)
 				{
 
-					if (Map[i][j] == 3)
+					if (Map[i][j] == 7)
 					{
 						Map[i][j] = 1;
 					}
@@ -415,9 +628,20 @@ void Player::PlayerDrawLine()
 	case EUp:
 		if (Map[int(Pos.y)][int(Pos.x)] == 0)
 		{
-			Map[int(Pos.y)][int(Pos.x)] = 2;
-
-			Pos.y--;
+			int a = 0;
+			for (int i = 0; i < Speed; i++)
+			{
+				if (Map[int(Pos.y - i)][int(Pos.x)] == 2)
+				{
+					break;
+				}
+				else
+				{
+					a++;
+				}
+				Map[int(Pos.y) - i][int(Pos.x)] = 2;
+			}
+			Pos.y -= a;
 			if (DXUTWasKeyPressed(VK_LEFT))
 			{
 				Dir = ELeft;
@@ -442,6 +666,61 @@ void Player::PlayerDrawLine()
 					{
 						if (i == 0 || i == WINSIZEY || j == 0 || j == WINSIZEX)
 						{
+							if (i != 0)
+							{
+								if (j != WINSIZEX)
+									if (Map[i - 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+									}
+								if (j != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+							}
+							if (i != WINSIZEY)
+							{
+								if (j != WINSIZEX)
+									if (Map[i + 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+								if (j != 0)
+									if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
+							if (j != 0)
+							{
+								if (i != WINSIZEY)
+									if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+									}
+								if (i != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
+							if (j != WINSIZEX)
+							{
+								if (i != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+								if (i != WINSIZEY)
+									if (Map[i + 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
 							s++;
 						}
 						else
@@ -499,7 +778,7 @@ void Player::PlayerDrawLine()
 						}
 						if (s == 2)
 						{
-							Map[i][j] = 3;
+							Map[i][j] = 7;
 						}
 					}
 				}
@@ -509,7 +788,7 @@ void Player::PlayerDrawLine()
 				for (int j = 0; j < WINSIZEX; j++)
 				{
 
-					if (Map[i][j] == 3)
+					if (Map[i][j] == 7)
 					{
 						Map[i][j] = 1;
 					}
@@ -579,9 +858,20 @@ void Player::PlayerDrawLine()
 	case EDown:
 		if (Map[int(Pos.y)][int(Pos.x)] == 0)
 		{
-			Map[int(Pos.y)][int(Pos.x)] = 2;
-
-			Pos.y++;
+			int a = 0;
+			for (int i = 0; i < Speed; i++)
+			{
+				if (Map[int(Pos.y + i)][int(Pos.x)] == 2)
+				{
+					break;
+				}
+				else
+				{
+					a++;
+				}
+				Map[int(Pos.y + i)][int(Pos.x)] = 2;
+			}
+			Pos.y += a;
 			if (DXUTWasKeyPressed(VK_LEFT))
 			{
 				Dir = ELeft;
@@ -605,6 +895,61 @@ void Player::PlayerDrawLine()
 					{
 						if (i == 0 || i == WINSIZEY || j == 0 || j == WINSIZEX)
 						{
+							if (i != 0)
+							{
+								if (j != WINSIZEX)
+									if (Map[i - 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+									}
+								if (j != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+							}
+							if (i != WINSIZEY)
+							{
+								if (j != WINSIZEX)
+									if (Map[i + 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+								if (j != 0)
+									if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
+							if (j != 0)
+							{
+								if (i != WINSIZEY)
+									if (Map[i + 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+									}
+								if (i != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j - 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
+							if (j != WINSIZEX)
+							{
+								if (i != 0)
+									if (Map[i - 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+									}
+								if (i != WINSIZEY)
+									if (Map[i + 1][j] == 2 && Map[i][j + 1] == 2)
+									{
+										s = 3;
+
+									}
+							}
 							s++;
 						}
 						else
@@ -662,7 +1007,7 @@ void Player::PlayerDrawLine()
 						}
 						if (s == 2)
 						{
-							Map[i][j] = 3;
+							Map[i][j] = 7;
 						}
 					}
 				}
@@ -672,7 +1017,7 @@ void Player::PlayerDrawLine()
 				for (int j = 0; j < WINSIZEX; j++)
 				{
 
-					if (Map[i][j] == 3)
+					if (Map[i][j] == 7)
 					{
 						Map[i][j] = 1;
 					}
@@ -720,14 +1065,58 @@ void Player::PlayerDrawLine()
 		}
 		break;
 	}
-	D3DLOCKED_RECT rt;
-	Back->texturePtr->LockRect(0, &rt, 0, D3DLOCK_DISCARD);
-	DWORD* TextureColor = (DWORD*)rt.pBits;
-	int nIdx = Pos.y * Back->info.Width + Pos.x;
-	D3DXCOLOR TargetPixel = TextureColor[nIdx];
-	TargetPixel.a = 0;
-	TextureColor[nIdx] = TargetPixel;
-	Back->texturePtr->UnlockRect(0);
+	for (int i = 0; i <= Speed; i++)
+	{
+		D3DLOCKED_RECT rt;
+		Back->texturePtr->LockRect(0, &rt, 0, D3DLOCK_DISCARD);
+		DWORD* TextureColor = (DWORD*)rt.pBits;
+		int nIdx;
+		int a = 0;
+
+		
+
+		switch (Dir)
+		{
+		case ERight:
+			if (Map[int(Pos.y )][int(Pos.x)+1] == 2)
+			{
+				a++;
+			}
+			nIdx = Pos.y * Back->info.Width + Pos.x + i;
+			break;
+		case ELeft:
+			if (Map[int(Pos.y )][int(Pos.x)-1] == 2)
+			{
+				a++;
+
+			}
+			nIdx = Pos.y * Back->info.Width + Pos.x - i;
+			break;
+		case EUp:
+			if (Map[int(Pos.y- i)][int(Pos.x)] == 2)
+			{
+				a++;
+
+			}
+			nIdx = (Pos.y - i) * Back->info.Width + Pos.x;
+			break;
+		case EDown:
+			if (Map[int(Pos.y + i)][int(Pos.x)] == 2)
+			{
+				a++;
+			}
+			nIdx = (Pos.y + i) * Back->info.Width + Pos.x;
+			break;
+		}
+		D3DXCOLOR TargetPixel1 = TextureColor[nIdx];
+		TargetPixel1.a = 0;
+		TextureColor[nIdx] = TargetPixel1;
+		Back->texturePtr->UnlockRect(0);
+		if (a == 1)
+		{
+			break;
+		}
+	}
 }
 
 void Player::Update()
@@ -739,10 +1128,7 @@ void Player::Update()
 	else if (LineDrawStart == true)
 	{
 		PlayerDrawLine();
-
 	}
-
-
 }
 
 void Player::Render()
@@ -839,7 +1225,7 @@ void Player::DelLine(int i, int j)
 	}
 }
 
-bool Player::Coll(int i , int j ,int Size)
+bool Player::Coll(int i, int j, int Size)
 {
 	float s;
 
@@ -850,15 +1236,43 @@ bool Player::Coll(int i , int j ,int Size)
 			if (Map[jj][ii] == 2)
 			{
 				s = sqrt((ii - i) * (ii - i) + (jj - j) * (jj - j));
-
-				if (s <Size)
+				if (s < Size)
 				{
+					SEXPos = Vec2(ii,jj);
+					return true;
+				}
+			}
+			else if (Map[jj][ii + 1] == 2)
+			{
+				s = sqrt((ii - i) * (ii - i) + (jj - j) * (jj - j));
+				if (s < Size)
+				{
+					SEXPos = Vec2(ii, jj);
+
+					return true;
+				}
+			}
+			else if (Map[jj + 1][ii] == 2)
+			{
+				s = sqrt((ii - i) * (ii - i) + (jj - j) * (jj - j));
+				if (s < Size)
+				{
+					SEXPos = Vec2(ii, jj);
+
 					return true;
 				}
 			}
 		}
 	}
-	cout << s <<"\n";
+	cout << s << "\n";
 
 	return false;
+}
+
+bool Player::Check(int i, int j,int num,int Num)
+{
+	if (Map[j+Num][i+num] == 2)
+	{
+		return true;
+	}
 }

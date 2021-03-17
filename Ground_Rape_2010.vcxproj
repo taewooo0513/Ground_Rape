@@ -31,13 +31,13 @@
     <ProjectGuid>{D3D09108-96D0-4629-88B8-122C0256058C}</ProjectGuid>
     <RootNamespace>Ground_Rape</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|X64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -246,6 +246,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
       <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
+      <StackReserveSize>1000000000</StackReserveSize>
     </Link>
     <Manifest>
       <EnableDPIAwareness>true</EnableDPIAwareness>
@@ -390,6 +391,8 @@
   <ItemGroup>
     <ClCompile Include="BigEnemy.cpp" />
     <ClCompile Include="Boss1Stage.cpp" />
+    <ClCompile Include="BossTail.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="IngameScene.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -401,6 +404,8 @@
     <ClCompile Include="SpeedEnemy.cpp" />
     <ClInclude Include="BigEnemy.h" />
     <ClInclude Include="Boss1Stage.h" />
+    <ClInclude Include="BossTail.h" />
+    <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="IngameScene.h" />
     <ClInclude Include="Object.h" />

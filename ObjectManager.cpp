@@ -51,3 +51,4 @@ void ObjectManager::Render()
 void ObjectManager::Release()
 {
 }
+
